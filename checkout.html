@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>Conekta</title>
+</head>
+<body>
+<form id="myForm" method="POST">
+    <button type="submit">Pagar con Conekta</button>
+</form>
+
+<script type="text/javascript">
+    document.forms['myForm'].addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        fetch('http://localhost:8080/checkout', {method: "POST"})
+            .then(response => response.json())
+            .then(json => {
+                window.location.href = json.url;
+            })
+            .catch(err => console.log('Solicitud fallida', err));
+    });
+</script>
+</body>
+</html>
